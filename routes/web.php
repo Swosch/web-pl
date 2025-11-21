@@ -66,7 +66,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ADMIN ROUTES (PERLU LOGIN)
 // ========================================
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Admin Dokumen
     Route::get('/admin/dokumen', [DokumenController::class, 'adminIndex'])->name('admin.dokumen.index');
     Route::post('/admin/dokumen', [DokumenController::class, 'store'])->name('admin.dokumen.store');
@@ -74,7 +74,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/dokumen/{dokumen}', [DokumenController::class, 'destroy'])->name('admin.dokumen.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Admin Berita
     Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admin.berita.index');
     Route::post('/admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
@@ -82,25 +82,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/berita/{berita}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 });
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Dashboard Admin
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
+    
     // ========================================
     // CRUD ROUTES UNTUK ADMIN
     // ========================================
-
-    // Berita Management
-    Route::post('/berita', [AdminController::class, 'storeBerita'])->name('manajemen.admin.berita.store');
-    Route::get('/berita/{id}/edit', [AdminController::class, 'editBerita'])->name('manajemen.admin.berita.edit');
-    Route::put('/berita/{id}', [AdminController::class, 'updateBerita'])->name('manajemen.admin.berita.update');
-    Route::delete('/berita/{id}', [AdminController::class, 'destroyBerita'])->name('manajemen.admin.berita.destroy');
+    
+        // Berita Management
+    Route::post('/berita', [AdminController::class, 'storeBerita'])->name('admin.berita.store');
+    Route::get('/berita/{id}/edit', [AdminController::class, 'editBerita'])->name('admin.berita.edit');
+    Route::put('/berita/{id}', [AdminController::class, 'updateBerita'])->name('admin.berita.update');
+    Route::delete('/berita/{id}', [AdminController::class, 'destroyBerita'])->name('admin.berita.destroy');
 
     // Galeri Management
-    Route::post('/galeri', [AdminController::class, 'storeGaleri'])->name('manajemen.admin.galeri.store');
-    Route::get('/galeri/{id}/edit', [AdminController::class, 'editGaleri'])->name('manajemen.admin.galeri.edit');
-    Route::put('/galeri/{id}', [AdminController::class, 'updateGaleri'])->name('manajemen.admin.galeri.update');
-    Route::delete('/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('manajemen.admin.galeri.destroy');
+    Route::post('/galeri', [AdminController::class, 'storeGaleri'])->name('admin.galeri.store');
+    Route::get('/galeri/{id}/edit', [AdminController::class, 'editGaleri'])->name('admin.galeri.edit');
+    Route::put('/galeri/{id}', [AdminController::class, 'updateGaleri'])->name('admin.galeri.update');
+    Route::delete('/galeri/{id}', [AdminController::class, 'destroyGaleri'])->name('admin.galeri.destroy');
 
     // Video Management
     Route::post('/video', [AdminController::class, 'storeVideo'])->name('admin.video.store');
@@ -121,10 +121,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/navbar/{id}', [AdminController::class, 'destroyNavbar'])->name('admin.navbar.destroy');
 
     // Dokumen Management
-    Route::post('/dokumen', [AdminController::class, 'storeDokumen'])->name('manajemen.admin.dokumen.store');
-    Route::get('/dokumen/{id}/edit', [DokumenController::class, 'edit'])->name('manajemen.admin.dokumen.edit');
-    Route::put('/dokumen/{id}', [DokumenController::class, 'update'])->name('manajemen.admin.dokumen.update');
-    Route::delete('/dokumen/{id}', [AdminController::class, 'destroyDokumen'])->name('manajemen.admin.dokumen.destroy');
+    Route::post('/dokumen', [AdminController::class, 'storeDokumen'])->name('admin.dokumen.store');
+    Route::get('/dokumen/{id}/edit', [DokumenController::class, 'edit'])->name('admin.dokumen.edit');
+    Route::put('/dokumen/{id}', [DokumenController::class, 'update'])->name('admin.dokumen.update');
+    Route::delete('/dokumen/{id}', [AdminController::class, 'destroyDokumen'])->name('admin.dokumen.destroy');
 
     // Sambutan Management
     Route::post('/sambutan', [AdminController::class, 'storeSambutan'])->name('admin.sambutan.store');
